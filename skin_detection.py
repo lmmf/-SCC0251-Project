@@ -1,11 +1,13 @@
+import sys
 import cv2
 import numpy as np
 
-def erode(img):
+def erode_dilate(img):
 	kernel=np.ones((3, 3), np.uint8)
-	img_eroded=cv2.erode(img, kernel, iterations=1)
+	img_enhanced=cv2.erode(img, kernel, iterations=1)
+	img_enhanced=cv2.dilate(img_enhanced, kernel, iterations=1)
 
-	return img_eroded
+	return img_enhanced
 
 
 def filter(img):
@@ -58,17 +60,22 @@ def calibrate(img):
 def keep_skin(img):
 	img_cal=calibrate(img)
 	img_fil=filter(img_cal)
-	img_ero=erode(img_fil)
+	img_enh=erode_dilate(img_fil)
 
-	return img_ero
+	return img_enh
 
 
 def main():
-	img=cv2.imread("image.jpg")
+	if len(sys.argv)!=2:
+		print("usage: python3 skin_detection.py file_name")
+		exit()
 
-	img=keep_skin(img)
+	img=cv2.imread(sys.argv[1])
 
-	cv2.imshow("Result", img)
+	img_skin=keep_skin(img)
+
+	cv2.imshow("Original", img)
+	cv2.imshow("Result", img_skin)
 	cv2.waitKey(0)
 
 
