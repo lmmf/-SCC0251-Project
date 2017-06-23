@@ -1,4 +1,12 @@
-#wun with "python demo.py"
+#run with "python demo.py"
+#skin_detection.py, image1.jpg and image2.jpg must be in the same folder as this
+
+#SCC0251 - Processamento de Imagens
+#PROJETO FINAL
+#Identificação de nudez ou pornografia em imagens
+#Nome								Número USP
+#Felipe Kazuyoshi Takara 			8921026
+#Leonardo Mellin Moreira Ferreira 	7982767
 
 import cv2
 
